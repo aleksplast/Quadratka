@@ -3,6 +3,7 @@
 
 int main(void)
 {
+
     double a = 0, b = 0, c = 0, d = 0, x1 = 0, x2 = 0;
     printf("This program will solve quadratic equation with standard form of ax^2 + bx + c = 0\n");
     printf("Enter the coefficients for the equation:\n");
