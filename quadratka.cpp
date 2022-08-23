@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
+#include <conio.h>
 #define EPSILON pow(10, -10)
 
 double coeff(double a);
@@ -9,6 +10,14 @@ int solve_quadratic_equation(double a, double b, double c, double* x1, double* x
 bool iszero (double n);
 void output(int roots, double x1, double x2);
 void square_equation(void);
+
+enum Number_of_Roots
+{
+    ZERO_ROOTS,
+    ONE_ROOT,
+    TWO_ROOTS,
+    INFINITE_ROOTS
+} ;
 
 int main(void)
 {
@@ -61,13 +70,13 @@ int solve_linear_equation(double b, double c, double* x1)
     if (!iszero(b))
     {
         *x1 = -c/b;
-        return 1;
+        return ONE_ROOT;
     }
 
     else if (iszero(b) && !iszero(c))
-        return 0;
+        return ZERO_ROOTS;
     else
-        return 4;
+        return INFINITE_ROOTS;
 }
 
 int solve_quadratic_equation(double a, double b, double c, double* x1, double* x2)
@@ -88,18 +97,18 @@ int solve_quadratic_equation(double a, double b, double c, double* x1, double* x
                 *x1 = (-b + sqrt_discr) / (2 * a);
                 *x2 = (-b - sqrt_discr) / (2 * a);
 
-                return 2;
+                return TWO_ROOTS;
             }
 
             else if (iszero(discr))
             {
                 *x1 = -b / (2 * a);
 
-                return 1;
+                return ONE_ROOT;
             }
 
             else
-                return 0;
+                return ZERO_ROOTS;
         }
 }
 
@@ -115,16 +124,16 @@ void output(int roots, double x1, double x2)
 {
     switch(roots)
     {
-        case 1:
+        case ONE_ROOT:
             printf("Equation has 1 solution: x = %lf\n", x1);
             break;
-        case 2:
+        case TWO_ROOTS:
             printf("Equation has 2 solutions: x1 = %lf and x2 = %lf\n", x1, x2);
             break;
-        case 0:
+        case ZERO_ROOTS:
             printf("Equation has no real solutions\n");
             break;
-        case 4:
+        case INFINITE_ROOTS:
             printf("Equation has infinite number of solutions\n");
             break;
         default:
