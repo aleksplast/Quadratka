@@ -7,6 +7,7 @@ double coeff(double a);
 int solve_linear_equation(double b, double c, double* x1);
 int solve_quadratic_equation(double a, double b, double c, double* x1, double* x2);
 bool iszero (double n);
+void output(int roots, double x1, double x2);
 
 int main(void)
 {
@@ -25,7 +26,7 @@ int main(void)
 
     roots = solve_quadratic_equation(a,b,c, &x1, &x2);
 
-
+    output(roots, x1, x2);
 
     return 0;
 }
@@ -67,7 +68,7 @@ int solve_quadratic_equation(double a, double b, double c, double* x1, double* x
     double discr = 0, sqrt_discr;
 
     if (iszero(a))
-        solve_linear_equation(b,c, x1);
+        return solve_linear_equation(b,c, x1);
     else
     {
         printf("Your equation: %.2lf * x^2 + %.2lf * x + %.2lf = 0\n", a, b, c);
@@ -101,4 +102,25 @@ bool iszero(double n)
         return true;
     else
         return false;
+}
+
+void output(int roots, double x1, double x2)
+{
+    switch(roots)
+    {
+        case 1:
+            printf("Equation has 1 solution: x = %lf", x1);
+            break;
+        case 2:
+            printf("Equation has 2 solutions: x1 = %lf and x2 = %lf", x1, x2);
+            break;
+        case 0:
+            printf("Equation has no real solutions");
+            break;
+        case 4:
+            printf("Equation has infinite number of solutions");
+            break;
+        default:
+            break;
+    }
 }
