@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <math.h>
+#include <assert.h>
+#define EPSILON pow(10, -10)
 
 double coeff(double a);
-void solve_linear_equation(double b, double c);
-void solve_quadratic_equation(double a, double b, double c);
+int solve_linear_equation(double b, double c, double* x1);
+int solve_quadratic_equation(double a, double b, double c, double* x1, double* x2);
+bool iszero (double n);
 
 int main(void)
 {
-
-    double a = 0, b = 0, c = 0;
+    int roots = 0;
+    double a = 0, b = 0, c = 0, x1 = 0, x2 = 0;
 
     printf("This program will solve quadratic equation with standard form of ax^2 + bx + c = 0\n");
 
@@ -16,75 +19,86 @@ int main(void)
     b = coeff(b);
     c = coeff(c);
 
-    printf("Your equation: %.2lf * x^2 + %.2lf * x + %.2lf = 0\n", a, b, c);
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
 
-    if (a == 0)
-    {
-        solve_linear_equation(b,c);
-    }
+    roots = solve_quadratic_equation(a,b,c, &x1, &x2);
 
-    else
-    {
-        solve_quadratic_equation(a,b,c);
-    }
+
 
     return 0;
 }
 
 double coeff(double a)
 {
+    fflush(stdin);
+
     printf("Enter the coefficient\n");
 
     if (scanf("%lf", &a) == 1)
         return a;
     else
     {
-        fflush(stdin);
-
         printf("Wrong input, enter a real number\n");
 
         return coeff(a);
     }
 }
 
-void solve_linear_equation(double b, double c)
+int solve_linear_equation(double b, double c, double* x1)
 {
-    if (b != 0)
+    printf("Your equation: %.2lf * x + %lf = 0\n", b, c);
+
+    if (!iszero(b))
     {
-        printf("Solving linear equation\n");
-        printf("x = %lf", -c/b);
+        *x1 = -c/b;
+        return 1;
     }
 
-    else if (b == 0 && c != 0)
-        printf("This equation has no real solutions");
+    else if (iszero(b) && !iszero(c))
+        return 0;
     else
-        printf("This equation has infinite number of solutions");
+        return 4;
 }
 
-void solve_quadratic_equation(double a, double b, double c)
+int solve_quadratic_equation(double a, double b, double c, double* x1, double* x2)
 {
-    double discr = 0, x1 = 0, x2 = 0;
+    double discr = 0, sqrt_discr;
 
-    discr = b * b - 4 * a * c;
+    if (iszero(a))
+        solve_linear_equation(b,c, x1);
+    else
+    {
+        printf("Your equation: %.2lf * x^2 + %.2lf * x + %.2lf = 0\n", a, b, c);
+        discr = b * b - 4 * a * c;
 
-        if (discr > 0)
-        {
-            discr = sqrt(discr);
+            if (discr > 0)
+            {
+                sqrt_discr = sqrt(discr);
 
-            x1 = (-b + discr) / (2 * a);
-            x2 = (-b - discr) / (2 * a);
+                *x1 = (-b + sqrt_discr) / (2 * a);
+                *x2 = (-b - sqrt_discr) / (2 * a);
 
-            printf("This equation has 2 solutions:\n");
-            printf("x = %lf, x = %lf", x1, x2);
+                return 2;
+            }
+
+            else if (iszero(discr))
+            {
+                *x1 = -b / (2 * a);
+
+                return 1;
+            }
+
+            else
+                return 0;
         }
+}
 
-        else if (discr == 0.0)
-        {
-            x1 = -b / (2 * a);
-
-            printf("This equation has 1 solution: x = %lf", x1);
-        }
-
-        else
-            printf("This equation has no real solutions");
+bool iszero(double n)
+{
+    if (fabs(n) < EPSILON)
+        return true;
+    else
+        return false;
 }
