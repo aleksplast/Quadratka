@@ -8,13 +8,27 @@ int solve_linear_equation(double b, double c, double* x1);
 int solve_quadratic_equation(double a, double b, double c, double* x1, double* x2);
 bool iszero (double n);
 void output(int roots, double x1, double x2);
+void square_equation(void);
 
 int main(void)
 {
+    int test=1;
+    char ch;
+    printf("This program will solve quadratic equations with standard form of ax^2 + bx + c = 0\n");
+
+    while(test == 1)
+    {
+        square_equation();
+        printf("Enter 1 to continue solving or 0 to end this program\n");
+        scanf("%d", &test);
+    }
+    return 0;
+}
+
+void square_equation(void)
+{
     int roots = 0;
     double a = 0, b = 0, c = 0, x1 = 0, x2 = 0;
-
-    printf("This program will solve quadratic equation with standard form of ax^2 + bx + c = 0\n");
 
     a = coeff(a);
     b = coeff(b);
@@ -27,8 +41,6 @@ int main(void)
     roots = solve_quadratic_equation(a,b,c, &x1, &x2);
 
     output(roots, x1, x2);
-
-    return 0;
 }
 
 double coeff(double a)
@@ -109,16 +121,16 @@ void output(int roots, double x1, double x2)
     switch(roots)
     {
         case 1:
-            printf("Equation has 1 solution: x = %lf", x1);
+            printf("Equation has 1 solution: x = %lf\n", x1);
             break;
         case 2:
-            printf("Equation has 2 solutions: x1 = %lf and x2 = %lf", x1, x2);
+            printf("Equation has 2 solutions: x1 = %lf and x2 = %lf\n", x1, x2);
             break;
         case 0:
-            printf("Equation has no real solutions");
+            printf("Equation has no real solutions\n");
             break;
         case 4:
-            printf("Equation has infinite number of solutions");
+            printf("Equation has infinite number of solutions\n");
             break;
         default:
             break;
