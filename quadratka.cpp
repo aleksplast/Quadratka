@@ -13,11 +13,11 @@ void square_equation(void);
 int main(void)
 {
     int test=1;
-    char ch;
     printf("This program will solve quadratic equations with standard form of ax^2 + bx + c = 0\n");
 
     while(test == 1)
     {
+        fflush(stdin);
         square_equation();
         printf("Enter 1 to continue solving or 0 to end this program\n");
         scanf("%d", &test);
