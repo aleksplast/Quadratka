@@ -73,7 +73,7 @@ int solve_square_equation(double a, double b, double c, double* x1, double* x2)
                 x1_temp = (-b + sqrt_discr) / (2 * a);
                 x2_temp = (-b - sqrt_discr) / (2 * a);
 
-                if (x1 > x2)
+                if (x1_temp < x2_temp)
                 {
                     *x1 = x1_temp;
                     *x2 = x2_temp;
