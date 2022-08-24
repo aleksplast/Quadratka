@@ -1,8 +1,5 @@
-#include "main.h"
-#include <stdio.h>
-#include <math.h>
-#include <assert.h>
-#include <conio.h>
+#include "header.h"
+
 #define EPSILON pow(10, -10)
 
 enum Number_of_Roots
