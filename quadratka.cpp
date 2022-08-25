@@ -61,7 +61,6 @@ int solve_linear_equation(const double b, const double c, double* const x1)
         *x1 = -c/b;
         return ONE_ROOT;
     }
-
     else if (!iszero(c))
         return ZERO_ROOTS;
     else
