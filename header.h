@@ -7,8 +7,7 @@
 //! @param[in] a Coefficient for input
 //! @return Coefficient for later using
 //!--------------------------------
-
-double coeff(double a);
+double coeff();
 
 //!--------------------------------
 //! @brief Solving linear equations
@@ -17,8 +16,7 @@ double coeff(double a);
 //! @param[out] x1 Root of the equation
 //! @return Number of roots of the equation
 //!--------------------------------
-
-int solve_linear_equation(double b, double c, double* x1);
+int solve_linear_equation(const double b, const double c, double* const x1);
 
 //!--------------------------------
 //! @brief Solving square equations
@@ -29,16 +27,14 @@ int solve_linear_equation(double b, double c, double* x1);
 //! @param[out] x2 Second, bigger root of the equation
 //! @return Number of roots
 //!--------------------------------
-
-int solve_square_equation(double a, double b, double c, double* x1, double* x2);
+int solve_square_equation(const double a, const double b, const double c, double* const x1, double* const x2);
 
 //!--------------------------------
 //! @brief Used for comparing double numbers with 0
 //! @param[in] n Number to compare
 //! @return True or False, depending on the number
 //!--------------------------------
-
-bool iszero (double n);
+bool iszero (const double n);
 
 //!--------------------------------
 //! @brief Used for output, showing number of roots and roots themselves
@@ -47,8 +43,7 @@ bool iszero (double n);
 //! @param[in] x2 Second, bigger root of the equation
 //! @return True or False, depending on the number
 //!--------------------------------
-
-void output(int roots, double x1, double x2);
+void output(const int roots, const double x1, const double x2);
 
 //!--------------------------------
 //! @brief Used for comparing two double numbers
@@ -56,21 +51,6 @@ void output(int roots, double x1, double x2);
 //! @param[in] b Second number to compare
 //! @return True or False, depending on numbers
 //!--------------------------------
-
-bool compare(double a, double b);
-
-//!--------------------------------
-//! @brief Used for testing of the equations
-//! @param[in] a Cofficient of x^2 in the equation
-//! @param[in] b Cofficient of x in the equation
-//! @param[in] c Free term of the equation
-//! @param[in] n_ans Expected number of roots of the equation
-//! @param[in] x1_ans Expected lesser root of the equation
-//! @param[in] x2_ans Expected bigger root of the equation
-//! @param[out] counter Serial number of the test
-//! @return True or False, depending on numbers
-//!--------------------------------
-
-void test_equation(double a, double b, double c, int n_ans, double x1_ans, double x2_ans, int* counter);
+bool compare(const double a, const double b);
 
 

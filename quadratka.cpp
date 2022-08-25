@@ -12,17 +12,17 @@
 //!--------------------------------
 //! @brief Used for output, shows the number of roots
 //!--------------------------------
-
 enum Number_of_Roots
 {
-    ZERO_ROOTS,  //return if square equation has zero roots
-    ONE_ROOT,   //return if square equation has one root
-    TWO_ROOTS,  //return if square equation has two roots
-    INFINITE_ROOTS  //return if square equation has infinite number of roots
+    ZERO_ROOTS,     ///<return if square equation has zero roots
+    ONE_ROOT,       ///<return if square equation has one root
+    TWO_ROOTS,      ///<return if square equation has two roots
+    INFINITE_ROOTS  ///<return if square equation has infinite number of roots
 } ;
 
-double coeff(double a)
+double coeff()
 {
+    double a = 0;
     bool flag = true;
     char ch = 0;
     int counter = 0;
@@ -52,7 +52,7 @@ double coeff(double a)
     }
 }
 
-int solve_linear_equation(double b, double c, double* x1)
+int solve_linear_equation(const double b, const double c, double* const x1)
 {
     DBG printf("Your equation: %.2lf * x + %lf = 0\n", b, c);
 
@@ -68,7 +68,7 @@ int solve_linear_equation(double b, double c, double* x1)
         return INFINITE_ROOTS;
 }
 
-int solve_square_equation(double a, double b, double c, double* x1, double* x2)
+int solve_square_equation(const double a, const double b, const double c, double* const x1, double* const x2)
 {
     double discr = 0, sqrt_discr = 0, x1_temp = 0, x2_temp = 0;
 
@@ -112,7 +112,7 @@ int solve_square_equation(double a, double b, double c, double* x1, double* x2)
         }
 }
 
-bool iszero(double n)
+bool iszero(const double n)
 {
     if (fabs(n) < EPSILON)
         return true;
@@ -120,7 +120,7 @@ bool iszero(double n)
         return false;
 }
 
-void output(int roots, double x1, double x2)
+void output(const int roots, const double x1, const double x2)
 {
     switch(roots)
     {
@@ -137,11 +137,12 @@ void output(int roots, double x1, double x2)
             printf("Equation has infinite number of solutions\n");
             break;
         default:
+            printf("UNKNOWN ERROR");
             break;
     }
 }
 
-bool compare(double a, double b)
+bool compare(const double a, const double b)
 {
     if (fabs(a-b) < EPSILON)
         return true;

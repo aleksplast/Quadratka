@@ -17,9 +17,9 @@ int main(void)
         int roots = 0;
         double a = 0, b = 0, c = 0, x1 = 0, x2 = 0;
 
-        a = coeff(a);
-        b = coeff(b);
-        c = coeff(c);
+        a = coeff();
+        b = coeff();
+        c = coeff();
 
         assert(isfinite(a));
         assert(isfinite(b));
