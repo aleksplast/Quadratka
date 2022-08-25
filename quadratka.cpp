@@ -1,6 +1,7 @@
 #include "header.h"
 #include <math.h>
 #include <conio.h>
+#include <ctype.h>
 
 //#define DEBUG
 
@@ -11,7 +12,7 @@
 #endif
 
 //!--------------------------------
-//! \brief Used for output, shows the number of roots
+//! @brief Used for output, shows the number of roots
 //!--------------------------------
 
 enum Number_of_Roots
@@ -24,18 +25,32 @@ enum Number_of_Roots
 
 double coeff(double a)
 {
-    char ch;
+    bool flag = true;
+    char ch = 0;
+    int counter = 0;
+
     fflush(stdin);
 
     printf("Enter the coefficient\n");
 
-    if (scanf("%lf", &a) == 1)
-        return a;
-    else
+    while (true)
     {
-        printf("Wrong input, enter a real number\n");
+        counter = 0;
+        flag = true;
 
-        return coeff(a);
+        fflush(stdin);
+
+        if (scanf("%lf", &a) == 1)
+        {
+            while ((ch = getchar()) != '\n')
+                counter += 1;
+            if (counter == 0)
+                return a;
+            else
+                printf("Wrong input, enter a real number\n");
+        }
+        else if (flag)
+            printf("Wrong input, enter a real number\n");
     }
 }
 
@@ -128,4 +143,10 @@ void output(int roots, double x1, double x2)
     }
 }
 
-
+bool compare(double a, double b)
+{
+    if (fabs(a-b) < EPSILON)
+        return true;
+    else
+        return false;
+}

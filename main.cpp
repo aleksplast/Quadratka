@@ -1,6 +1,8 @@
 #include "header.h"
 #include <stdio.h>
 #include <assert.h>
+#include <conio.h>
+#include <math.h>
 
 int main(void)
 {
