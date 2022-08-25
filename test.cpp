@@ -8,6 +8,7 @@ enum
     GREEN = 2,
     RED = 3,
 };
+
 int main(void)
 {
     int counter = 0;
@@ -71,7 +72,7 @@ int test_solve_square_equation(const double a, const double b, const double c, c
     {
         SetColor(RED);
 
-        printf("Test #%d\nFAILED: nRoots = %d, x1 = %lf, x2 = %lf\n    \
+        printf("Test #%d\nFAILED:   nRoots = %d, x1 = %lf, x2 = %lf\n    \
         \rExpected: nRoots = %d, x1 = %lf, x2 = %lf\n",               \
         *counter, nRoots, x1, x2, n_ans, x1_ans, x2_ans);
 
@@ -105,7 +106,7 @@ int test_solve_linear_equation(double b, double c, int n_ans, double x_ans, int*
     {
         SetColor(RED);
 
-        printf("Test #%d\nFAILED: nRoots = %d, x = %lf\n    \
+        printf("Test #%d\nFAILED:   nRoots = %d, x = %lf\n    \
         \rExpected: nRoots = %d, x = %lf\n\033",        \
         *counter, nRoots, x, n_ans, x_ans);
 
@@ -134,7 +135,7 @@ int test_iszero(const double a, const bool ans, int* const counter)
     {
         SetColor(RED);
 
-        printf("Test #%d\nFAILED: ans = %d\n    \
+        printf("Test #%d\nFAILED:   ans = %d\n    \
         \rExpected: ans = %d\n",        \
         *counter, iszero(a), ans);
 
@@ -163,7 +164,7 @@ int test_compare(const double a, const double b, const bool ans, int* const coun
     {
         SetColor(RED);
 
-        printf("Test #%d\nFAILED: ans = %d\n    \
+        printf("Test #%d\nFAILED:   ans = %d\n    \
         \rExpected: ans = %d\n",        \
         *counter, compare(a,b), ans);
 
