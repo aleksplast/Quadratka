@@ -9,6 +9,6 @@ debug:
 test:
 	$(cc) quadratka.cpp test.cpp -o test
 clean:
-	rm -rf *.exe
+	rm -rf *.o
 
 #-MD -MMD, регулярные выражения в makefile

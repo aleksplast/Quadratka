@@ -1,9 +1,13 @@
 #include "tests.h"
 #include "header.h"
+#include <Windows.h>
 
-//!--------------------------------
-//! @brief Main function for testing of the equations
-//!--------------------------------
+enum
+{
+    WHITE = 1,
+    GREEN = 2,
+    RED = 3,
+};
 int main(void)
 {
     int counter = 0;
@@ -21,6 +25,7 @@ int main(void)
     OkTests += test_solve_square_equation( 1,  2,  1,  1, -1,   0, &counter);
     OkTests += test_solve_square_equation(10,  1,  10, 0,  0,   0, &counter);
     OkTests += test_solve_square_equation( 1, -5,  4,  2,  1,   4, &counter);
+    OkTests += test_solve_square_equation( 2, -5,  4,  2,  1,   4, &counter);
     printf("%d succesfull test out of 10\n", OkTests);
 
     OkTests = 0;
@@ -35,20 +40,20 @@ int main(void)
     OkTests = 0;
     counter = 0;
     printf("---Testing iszero---\n");
-    OkTests += test_iszero(1e-7, false, &counter);
-    OkTests += test_iszero(1, false, &counter);
-    OkTests += test_iszero(0, true, &counter);
+    OkTests += test_iszero(1e-7,  false, &counter);
+    OkTests += test_iszero(   1,  false, &counter);
+    OkTests += test_iszero(   0,  true, &counter);
     OkTests += test_iszero(1e-15, true, &counter);
-    printf("%d succesfull test out of 4\n", OkTests, &counter);
+    printf("%d succesfull test out of 4\n", OkTests);
 
     OkTests = 0;
     counter = 0;
     printf("---Testing compare---\n");
-    OkTests += test_compare(1, 1+1e-7, false, &counter);
-    OkTests += test_compare(1, 6, false, &counter);
-    OkTests += test_compare(2, 2, true, &counter);
+    OkTests += test_compare(1,  1+1e-7, false, &counter);
+    OkTests += test_compare(1,       6, false, &counter);
+    OkTests += test_compare(2,       2, true, &counter);
     OkTests += test_compare(1, 1+1e-15, true, &counter);
-    printf("%d succesfull test out of 4\n", OkTests, &counter);
+    printf("%d succesfull test out of 4\n", OkTests);
 
     return 0;
 }
@@ -60,22 +65,28 @@ int test_solve_square_equation(const double a, const double b, const double c, c
 
     *counter += 1;
 
-    printf("Test #%d ", *counter);
-
     nRoots = solve_square_equation(a,b,c, &x1, &x2);
 
     if (!(nRoots == n_ans && compare(x1, x1_ans) && compare(x2, x2_ans)))
     {
-        printf("FAILED: nRoots = %d, x1 = %lf, x2 = %lf\n    \
-        Expected: nRoots = %d, x1 = %lf, x2 = %lf\n",        \
-        nRoots, x1, x2, n_ans, x1_ans, x2_ans);
+        SetColor(RED);
+
+        printf("Test #%d\nFAILED: nRoots = %d, x1 = %lf, x2 = %lf\n    \
+        \rExpected: nRoots = %d, x1 = %lf, x2 = %lf\n",               \
+        *counter, nRoots, x1, x2, n_ans, x1_ans, x2_ans);
+
+        SetColor(WHITE);
 
         return 0;
     }
 
     else
     {
-        printf("succeeded\n");
+        SetColor(GREEN);
+
+        printf("Test #%d succeeded\n", *counter);
+
+        SetColor(WHITE);
 
         return 1;
     }
@@ -88,22 +99,28 @@ int test_solve_linear_equation(double b, double c, int n_ans, double x_ans, int*
 
     *counter += 1;
 
-    printf("Test #%d ", *counter);
-
     nRoots = solve_linear_equation(b, c, &x);
 
     if (!(nRoots == n_ans && compare(x, x_ans)))
     {
-        printf("FAILED: nRoots = %d, x = %lf\n    \
-        Expected: nRoots = %d, x = %lf\n",        \
-        nRoots, x, n_ans, x_ans);
+        SetColor(RED);
+
+        printf("Test #%d\nFAILED: nRoots = %d, x = %lf\n    \
+        \rExpected: nRoots = %d, x = %lf\n\033",        \
+        *counter, nRoots, x, n_ans, x_ans);
+
+        SetColor(WHITE);
 
         return 0;
     }
 
     else
     {
-        printf("succeeded\n");
+        SetColor(GREEN);
+
+        printf("Test #%d succeeded\n", *counter);
+
+        SetColor(WHITE);
 
         return 1;
     }
@@ -113,20 +130,26 @@ int test_iszero(const double a, const bool ans, int* const counter)
 {
     *counter += 1;
 
-    printf("Test #%d ", *counter);
-
     if (!(iszero(a) == ans))
     {
-        printf("FAILED: ans = %d\n    \
-        Expected: ans = %d\n",        \
-        iszero(a), ans);
+        SetColor(RED);
+
+        printf("Test #%d\nFAILED: ans = %d\n    \
+        \rExpected: ans = %d\n",        \
+        *counter, iszero(a), ans);
+
+        SetColor(WHITE);
 
         return 0;
     }
 
     else
     {
-        printf("succeeded\n");
+        SetColor(GREEN);
+
+        printf("Test #%d succeeded\n", *counter);
+
+        SetColor(WHITE);
 
         return 1;
     }
@@ -136,21 +159,37 @@ int test_compare(const double a, const double b, const bool ans, int* const coun
 {
     *counter += 1;
 
-    printf("Test #%d ", *counter);
-
     if (!(compare(a,b) == ans))
     {
-        printf("FAILED: ans = %d\n    \
-        Expected: ans = %d\n",        \
-        compare(a,b), ans);
+        SetColor(RED);
+
+        printf("Test #%d\nFAILED: ans = %d\n    \
+        \rExpected: ans = %d\n",        \
+        *counter, compare(a,b), ans);
+
+        SetColor(WHITE);
 
         return 0;
     }
 
     else
     {
-        printf("succeeded\n");
+        SetColor(GREEN);
+
+        printf("Test #%d succeeded\n", *counter);
+
+        SetColor(WHITE);
 
         return 1;
     }
+}
+
+void SetColor(int const color)
+{
+    if (color == 1)
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+    else if (color == 2)
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+    else if (color == 3)
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
 }
