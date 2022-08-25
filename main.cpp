@@ -1,8 +1,10 @@
 #include "header.h"
-#include <stdio.h>
 #include <assert.h>
-#include <conio.h>
 #include <math.h>
+
+//!--------------------------------
+//! @brief Main function of the program
+//!--------------------------------
 
 int main(void)
 {

@@ -67,9 +67,10 @@ bool compare(double a, double b);
 //! @param[in] n_ans Expected number of roots of the equation
 //! @param[in] x1_ans Expected lesser root of the equation
 //! @param[in] x2_ans Expected bigger root of the equation
+//! @param[out] counter Serial number of the test
 //! @return True or False, depending on numbers
 //!--------------------------------
 
-void test_equation(double a, double b, double c, int n_ans, double x1_ans, double x2_ans);
+void test_equation(double a, double b, double c, int n_ans, double x1_ans, double x2_ans, int* counter);
 
 

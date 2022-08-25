@@ -1,7 +1,5 @@
 #include "header.h"
 #include <math.h>
-#include <conio.h>
-#include <ctype.h>
 
 //#define DEBUG
 
