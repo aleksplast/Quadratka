@@ -58,7 +58,7 @@ double coeff()
 
 int solve_linear_equation(const double b, const double c, double* const x1)
 {
-    DBG printf("Your equation: %.2lf * x + %lf = 0\n", b, c);
+    DBG printf("Your equation: %.2lf * x + %.2lf = 0\n", b, c);
 
     assert(x1 != NULL);
     assert(isfinite(b));
@@ -113,14 +113,12 @@ int solve_square_equation(const double a, const double b, const double c, double
 
                 return TWO_ROOTS;
             }
-
             else if (iszero(discr))
             {
                 *x1 = -b / (2 * a);
 
                 return ONE_ROOT;
             }
-
             else
                 return ZERO_ROOTS;
         }
@@ -167,12 +165,12 @@ bool compare(const double a, const double b)
     return fabs(a-b) < EPSILON;
 }
 
-void SetColor(int const color)
+void SetColor(enum Colors color)
 {
-    if (color == 1)
+    if (color == WHITE)
         txSetConsoleAttr(FOREGROUND_WHITE);
-    else if (color == 2)
+    else if (color == GREEN)
         txSetConsoleAttr(FOREGROUND_GREEN);
-    else if (color == 3)
+    else if (color == RED)
         txSetConsoleAttr(FOREGROUND_RED);
 }

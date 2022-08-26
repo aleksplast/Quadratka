@@ -4,6 +4,16 @@
 #define EPSILON 1e-10
 
 //!--------------------------------
+//! @brief Used for colorizing command line's text
+//!--------------------------------
+enum Colors
+{
+    WHITE = 1, ///<Inficating white color
+    GREEN = 2, ///<indicating green color
+    RED   = 3, ///<Indicating red color
+};
+
+//!--------------------------------
 //! @brief Used for input of coefficients
 //! @param[in] a Coefficient for input
 //! @return Coefficient for later using
@@ -58,16 +68,6 @@ bool compare(const double a, const double b);
 //! @brief Used for chaging colore of command line's text
 //! @param[in] color Color, which will be used for command line
 //!--------------------------------
-void SetColor(int const color);
-
-//!--------------------------------
-//! @brief Used for colorizing command line's text
-//!--------------------------------
-enum Colors
-{
-    WHITE = 1, ///<Inficating white color
-    GREEN = 2, ///<indicating green color
-    RED   = 3, ///<Indicating red color
-};
+void SetColor(enum Colors color);
 
 #endif //HEADER_H
