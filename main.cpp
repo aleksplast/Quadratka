@@ -14,14 +14,13 @@ int main()
 
     while(proceed == 1)
     {
-        int roots = 0;
-        double a = 0, b = 0, c = 0, x1 = 0, x2 = 0;
+        double x1 = 0, x2 = 0;
 
-        a = coeff();
-        b = coeff();
-        c = coeff();
+        double a = coeff();
+        double b = coeff();
+        double c = coeff();
 
-        roots = solve_square_equation(a, b, c, &x1, &x2);
+        int roots = solve_square_equation(a, b, c, &x1, &x2);
 
         output(roots, x1, x2);
         printf("Enter 1 to continue solving or 0 to end this program\n");

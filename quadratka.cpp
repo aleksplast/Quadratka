@@ -5,7 +5,7 @@
 #include "header.h"
 #include "TXLib.h"
 
-//#define DEBUG
+#define DEBUG
 
 #ifndef DEBUG
 #define DBG if(false)
@@ -64,15 +64,23 @@ int solve_linear_equation(const double b, const double c, double* const x1)
     assert(isfinite(b));
     assert(isfinite(c));
 
+    DBG printf("c = %lf, iszero(c) = %d\n", c, iszero(c));
+
     if (!iszero(b))
     {
         *x1 = -c/b;
         return ONE_ROOT;
     }
     else if (!iszero(c))
+    {
+        DBG printf("I am here\n");
         return ZERO_ROOTS;
+    }
     else
+    {
+        DBG printf("MEOW\n");
         return INFINITE_ROOTS;
+    }
 }
 
 int solve_square_equation(const double a, const double b, const double c, double* const x1, double* const x2)
@@ -136,6 +144,8 @@ void output(const int roots, const double x1, const double x2)
     assert(isfinite(roots));
     assert(isfinite(x1));
     assert(isfinite(x2));
+
+    DBG printf("roots = %d\n", roots);
 
     switch(roots)
     {
