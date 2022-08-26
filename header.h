@@ -1,4 +1,5 @@
-#include <stdio.h>
+#ifndef HEADER_H
+#define HEADER_H
 
 #define EPSILON 1e-10
 
@@ -53,4 +54,20 @@ void output(const int roots, const double x1, const double x2);
 //!--------------------------------
 bool compare(const double a, const double b);
 
+//!--------------------------------
+//! @brief Used for chaging colore of command line's text
+//! @param[in] color Color, which will be used for command line
+//!--------------------------------
+void SetColor(int const color);
 
+//!--------------------------------
+//! @brief Used for colorizing command line's text
+//!--------------------------------
+enum Colors
+{
+    WHITE = 1, ///<Inficating white color
+    GREEN = 2, ///<indicating green color
+    RED   = 3, ///<Indicating red color
+};
+
+#endif //HEADER_H

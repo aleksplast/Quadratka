@@ -1,5 +1,9 @@
-#include "header.h"
 #include <math.h>
+#include <stdio.h>
+#include <assert.h>
+
+#include "header.h"
+#include "TXLib.h"
 
 //#define DEBUG
 
@@ -24,7 +28,7 @@ double coeff()
 {
     double a = 0;
     bool flag = true;
-    char ch = 0;
+    char ch = '\0';
     int counter = 0;
 
     fflush(stdin);
@@ -56,6 +60,10 @@ int solve_linear_equation(const double b, const double c, double* const x1)
 {
     DBG printf("Your equation: %.2lf * x + %lf = 0\n", b, c);
 
+    assert(x1 != NULL);
+    assert(isfinite(b));
+    assert(isfinite(c));
+
     if (!iszero(b))
     {
         *x1 = -c/b;
@@ -70,6 +78,13 @@ int solve_linear_equation(const double b, const double c, double* const x1)
 int solve_square_equation(const double a, const double b, const double c, double* const x1, double* const x2)
 {
     double discr = 0, sqrt_discr = 0, x1_temp = 0, x2_temp = 0;
+
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
+    assert(x1 != x2);
+    assert(x2 != NULL);
+    assert(x1 != NULL);
 
     if (iszero(a))
         return solve_linear_equation(b,c, x1);
@@ -113,14 +128,17 @@ int solve_square_equation(const double a, const double b, const double c, double
 
 bool iszero(const double n)
 {
-    if (fabs(n) < EPSILON)
-        return true;
-    else
-        return false;
+    assert(isfinite(n));
+
+    return fabs(n) < EPSILON;
 }
 
 void output(const int roots, const double x1, const double x2)
 {
+    assert(isfinite(roots));
+    assert(isfinite(x1));
+    assert(isfinite(x2));
+
     switch(roots)
     {
         case ONE_ROOT:
@@ -143,8 +161,18 @@ void output(const int roots, const double x1, const double x2)
 
 bool compare(const double a, const double b)
 {
-    if (fabs(a-b) < EPSILON)
-        return true;
-    else
-        return false;
+    assert(isfinite(a));
+    assert(isfinite(b));
+
+    return fabs(a-b) < EPSILON;
+}
+
+void SetColor(int const color)
+{
+    if (color == 1)
+        txSetConsoleAttr(FOREGROUND_WHITE);
+    else if (color == 2)
+        txSetConsoleAttr(FOREGROUND_GREEN);
+    else if (color == 3)
+        txSetConsoleAttr(FOREGROUND_RED);
 }

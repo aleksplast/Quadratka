@@ -1,14 +1,15 @@
-cc = g++
+CC := g++
+SRC = quadratka.cpp main.cpp
+SRC_TEST = quadratka.cpp test.cpp
+DIR = C:\Users\USER\Documents\quadratka
 
 .PHONY: all clean
 
-square:
-	$(cc) quadratka.cpp main.cpp -o quadratka
-debug:
-	$(cc) -D_GLIBCXX_DEBUG quadratka.cpp main.cpp -o debug
-test:
-	$(cc) quadratka.cpp test.cpp -o test
-clean:
-	rm -rf *.o
+quadratka: $(SRC)
+	$(CC) $^ -o $(DIR)\$@
 
-#-MD -MMD, регулярные выражения в makefile
+test: $(SRC_TEST)
+	$(CC) $^ -o $(DIR)\$@
+
+clean:
+	rm -rf *.exe

@@ -1,13 +1,7 @@
 #include "tests.h"
 #include "header.h"
-#include <Windows.h>
-
-enum
-{
-    WHITE = 1,
-    GREEN = 2,
-    RED = 3,
-};
+#include <TXLib.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -26,7 +20,6 @@ int main(void)
     OkTests += test_solve_square_equation( 1,  2,  1,  1, -1,   0, &counter);
     OkTests += test_solve_square_equation(10,  1,  10, 0,  0,   0, &counter);
     OkTests += test_solve_square_equation( 1, -5,  4,  2,  1,   4, &counter);
-    OkTests += test_solve_square_equation( 2, -5,  4,  2,  1,   4, &counter);
     printf("%d succesfull test out of 10\n", OkTests);
 
     OkTests = 0;
@@ -61,12 +54,20 @@ int main(void)
 
 int test_solve_square_equation(const double a, const double b, const double c, const int n_ans, const double x1_ans, const double x2_ans, int* const counter)
 {
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
+    assert(isfinite(n_ans));
+    assert(isfinite(x1_ans));
+    assert(isfinite(x2_ans));
+    assert(counter != NULL);
+
     double x1 = 0, x2 = 0;
     int nRoots = 0;
 
     *counter += 1;
 
-    nRoots = solve_square_equation(a,b,c, &x1, &x2);
+    nRoots = solve_square_equation(a, b, c, &x1, &x2);
 
     if (!(nRoots == n_ans && compare(x1, x1_ans) && compare(x2, x2_ans)))
     {
@@ -80,7 +81,6 @@ int test_solve_square_equation(const double a, const double b, const double c, c
 
         return 0;
     }
-
     else
     {
         SetColor(GREEN);
@@ -95,6 +95,12 @@ int test_solve_square_equation(const double a, const double b, const double c, c
 
 int test_solve_linear_equation(double b, double c, int n_ans, double x_ans, int* counter)
 {
+    assert(isfinite(b));
+    assert(isfinite(c));
+    assert(isfinite(n_ans));
+    assert(isfinite(x_ans));
+    assert(counter != NULL);
+
     double x = 0;
     int nRoots = 0;
 
@@ -129,6 +135,10 @@ int test_solve_linear_equation(double b, double c, int n_ans, double x_ans, int*
 
 int test_iszero(const double a, const bool ans, int* const counter)
 {
+    assert(isfinite(a));
+    assert(isfinite(ans));
+    assert(counter != NULL);
+
     *counter += 1;
 
     if (!(iszero(a) == ans))
@@ -158,6 +168,11 @@ int test_iszero(const double a, const bool ans, int* const counter)
 
 int test_compare(const double a, const double b, const bool ans, int* const counter)
 {
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(ans));
+    assert(counter != NULL);
+
     *counter += 1;
 
     if (!(compare(a,b) == ans))
@@ -172,7 +187,6 @@ int test_compare(const double a, const double b, const bool ans, int* const coun
 
         return 0;
     }
-
     else
     {
         SetColor(GREEN);
@@ -183,14 +197,4 @@ int test_compare(const double a, const double b, const bool ans, int* const coun
 
         return 1;
     }
-}
-
-void SetColor(int const color)
-{
-    if (color == 1)
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-    else if (color == 2)
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
-    else if (color == 3)
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
 }
